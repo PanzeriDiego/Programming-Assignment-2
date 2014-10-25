@@ -10,9 +10,9 @@ makeCacheMatrix <- function(x = matrix()) {
   
   get <- function() x                           ## Returns the initial matrix (x).
   
-  setsolve <- function(solve) pippo <<- solve       ## Changes the value of the inverse (s).
+  setsolve <- function(solve) pippo <<- solve       ## Changes the value of the inverse (pippo).
   
-  getsolve <- function() pippo                      ## Returns the value of the inverse (s).
+  getsolve <- function() pippo                      ## Returns the value of the inverse (pippo).
   
   list(set = set, get = get,                    ## Defines a list that allows to call
        setsolve = setsolve,                     ## the 4 function independently, given 
@@ -28,16 +28,16 @@ cacheSolve <- function(x, ...) {
  
   pippo <- x$getsolve()                             ## Retrieves the s value from "makeCacheMatrix".
   
-  if(!is.null(pippo)) {                             ## If "s" as a value different from NULL,
+  if(!is.null(pippo)) {                             ## If "pippo" as a value different from NULL,
     message("getting cached data")                  ## it is returned without computing it again.
     return(pippo)
     
   } else {
     
-    data <- x$get()                             ## If "s" is NULL, the initial matrix is retrieved
+    data <- x$get()                             ## If "pippo" is NULL, the initial matrix is retrieved
     pippo <- solve(data, ...)                   ## in "data", the inverse is computed and the result
     x$setsolve(pippo)                           ## is passed to the "setsolve" function that caches
-                                                ## the value in the variable "s" of "makeCacheMatrix".
+                                                ## the value in the variable "pippo" of "makeCacheMatrix".
   }
   
   pippo                                             ## Prints the calculated or retrieved inverse matrix.
